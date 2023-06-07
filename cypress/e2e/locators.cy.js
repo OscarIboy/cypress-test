@@ -30,7 +30,7 @@ describe('Locators', () => {
 		cy.contains('.header-wrapper', 'Widgets')
 	})
 
-    it.only('parents', () => {
+    it('parents', () => {
 		cy.visit('/automation-practice-form')
 		cy.once('uncaught:exception', () => false)
 
