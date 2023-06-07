@@ -1,4 +1,5 @@
 describe('Primer Prueba', () => {
+	
 	it('Navegar a nuestra primer pagina', () => {
 		cy.visit('www.platzi.com')
 	})
