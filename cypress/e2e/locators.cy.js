@@ -11,6 +11,12 @@ describe('Locators', () => {
 		cy.get('[placeholder="First Name"]')
 	})
 
+	it('Atributo y Tag', () =>{
+		cy.visit('/automation-practice-form')
+		cy.once('uncaught:exception', () => false)
+		cy.get('input[placeholder="First Name"]')
+	})
+
 	it('Id', () => {
 		cy.visit('/automation-practice-form')
 		cy.once('uncaught:exception', () => false)

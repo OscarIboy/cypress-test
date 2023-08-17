@@ -30,6 +30,9 @@ describe('Guardando elementos', () => {
 				expect(labels.length).to.eq(16)
 				// Si queremos que este elemento de Jquery se vuelva un elemento de cypress debemos de usar wrap
 				cy.wrap(inputs).should('have.length', 15)
+
+				//cy.pause()
+				console.log('Soy la longitud', inputs.length)
 			})
 
 		// como se haria en selenium o puppeteer
