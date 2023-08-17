@@ -1,8 +1,7 @@
 describe('Guardando elementos', () => {
-
 	it('Repeticion', () => {
 		cy.visit('/automation-practice-form')
-        cy.once('uncaught:exception', () => false)
+		cy.once('uncaught:exception', () => false)
 		cy.get('input[placeholder="First Name"]').parents('form').find('label')
 		cy.get('input[placeholder="First Name"]').parents('form').find('input')
 		cy.get('input[placeholder="First Name"]').parents('form').find('div')
@@ -16,7 +15,7 @@ describe('Guardando elementos', () => {
 
 	it.only('como se hace en cypress', () => {
 		cy.visit('/automation-practice-form')
-        cy.once('uncaught:exception', () => false)
+		cy.once('uncaught:exception', () => false)
 		cy.get('input[placeholder="First Name"]')
 			.parents('form')
 			.then((form) => {

@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open --browser chrome --e2e"
+    "test:ui": "cypress open --browser chrome --e2e",
+    "test:headless": "cypress run",
+    "test:headless:chrome": "cypress run --browser chrome",
+    "test:headless:firefox": "cypress run --browser firefox",
+    "test:navegacion": "cypress run --browser chrome --spec cypress/e2e/navegacion.cy.js"
   },
   "keywords": [],
   "author": "",

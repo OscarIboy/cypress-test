@@ -11,7 +11,7 @@ describe('Locators', () => {
 		cy.get('[placeholder="First Name"]')
 	})
 
-	it('Atributo y Tag', () =>{
+	it('Atributo y Tag', () => {
 		cy.visit('/automation-practice-form')
 		cy.once('uncaught:exception', () => false)
 		cy.get('input[placeholder="First Name"]')
@@ -36,19 +36,19 @@ describe('Locators', () => {
 		cy.contains('.header-wrapper', 'Widgets')
 	})
 
-    it('parents', () => {
+	it('parents', () => {
 		cy.visit('/automation-practice-form')
 		cy.once('uncaught:exception', () => false)
 
-        // Obteniendo el elemento padre
+		// Obteniendo el elemento padre
 		cy.get('[placeholder="First Name"]').parent()
 
-        // Obteniendo los elementos padres
+		// Obteniendo los elementos padres
 		cy.get('[placeholder="First Name"]').parents()
 
-        cy.get('[placeholder="First Name"]').parents().find('label')
+		cy.get('[placeholder="First Name"]').parents().find('label')
 
-        // Obteniendo los elementos hijos
-        cy.get('form').find('label')
+		// Obteniendo los elementos hijos
+		cy.get('form').find('label')
 	})
 })
