@@ -35,11 +35,26 @@ describe('Interactuar con los elementos', () => {
 		//cy.get('#enableAfter').click({timeout: 0, force:true})
 	})
 
-	it.only('Click por posicion', () => {
+	it('Click por posicion', () => {
 		cy.visit('/buttons')
 		cy.once('uncaught:exception', () => false)
 		cy.get('button').eq(3).parent().parent().click('topRight')
 		cy.get('button').eq(3).parent().parent().click('bottomLeft')
 		cy.get('button').eq(3).parent().parent().click(5, 60)
+	})
+
+	it.only('Input type text', () => {
+		cy.visit('/automation-practice-form')
+		cy.once('uncaught:exception', () => false)
+		cy.get('#firstName').type('Oscar')
+		cy.get('#lastName').type('Iboy')
+
+		// Limpiar input
+		cy.get('#firstName').type('{selectAll}{backspace}')
+		cy.get('#firstName').type('Eduardo')
+
+		// Limpiar input 2
+		cy.get('#firstName').clear()
+		cy.get('#firstName').type('Alejandro')
 	})
 })
