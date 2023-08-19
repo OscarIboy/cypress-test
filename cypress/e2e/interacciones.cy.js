@@ -243,7 +243,7 @@ describe('Interactuar con los elementos', () => {
 		cy.contains('You selected Cancel').should('exist')
 	})
 
-	it.only('Interactuando con tooltip', function () {
+	it('Interactuando con tooltip', function () {
 		cy.visit('/tool-tips')
 		cy.once('uncaught:exception', () => false)
 
@@ -251,5 +251,19 @@ describe('Interactuar con los elementos', () => {
 		cy.contains('You hovered over the Button').should('exist')
 		cy.get('#toolTipButton').trigger('mouseout')
 		cy.contains('You hovered over the Button').should('not.exist')
+	})
+
+	it.only('Interactuando con drag and drop', function () {
+		cy.visit('/dragabble')
+		cy.once('uncaught:exception', () => false)
+
+		cy.get('#dragBox')
+			.trigger('mousedown', {
+				which: 1,
+				pageX: 600,
+				pageY: 100,
+			})
+			.trigger('mousemove', { which: 1, PageX: 100, pageY: 600 })
+			.trigger('mouseup')
 	})
 })
