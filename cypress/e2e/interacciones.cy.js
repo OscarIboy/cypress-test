@@ -189,11 +189,67 @@ describe('Interactuar con los elementos', () => {
 			})
 	})
 
-	it.only('Interactuando con date pickers', function () {
+	it('Interactuando con date pickers', function () {
 		cy.visit('https://material.angular.io/components/datepicker/overview')
-		cy.get('datepicker-overview-example').find('label').eq(0).type('08/11/2023')
-		
+		cy.get('datepicker-overview-example')
+			.find('label')
+			.eq(0)
+			.type('08/11/2023')
+
 		cy.get('datepicker-overview-example').find('button').click()
 		//cy.get('datepicker-overview-example').find('svg).click()
+	})
+
+	it('Interactuando con modals', function () {
+		cy.visit('/modal-dialogs')
+		cy.once('uncaught:exception', () => false)
+
+		cy.get('#showSmallModal').click()
+		cy.get('#closeSmallModal').click()
+
+		cy.get('#showLargeModal').click()
+		cy.get('#closeLargeModal').click()
+	})
+
+	it('Interactuando con alerts', function () {
+		cy.visit('/alerts')
+		cy.once('uncaught:exception', () => false)
+
+		// IMPORTANTE
+		// const stub = cy.stub()
+		// cy.on('window:confirm', stub)
+		// cy.get('#confirmButton')
+		// 	.click()
+		// 	.then(() => {
+		// 		expect(stub.getCall(0)).to.be.calledWith(
+		// 			'Do you confirm action?'
+		// 		)
+		// 	})
+		// cy.contains('You selected Ok').should('exist')
+
+		// Manera sensilla
+		// cy.get('#confirmButton').click()
+		// cy.on('windows:confirm', (confirm)=>{
+		// 	expect(confirm).to.equal('Do you confirm action?')
+		// })
+		// cy.contains('You selected Ok').should('exist')
+
+		// Cancel
+		cy.get('#confirmButton').click()
+		cy.on('window:confirm', (confirm) => {
+			expect(confirm).to.equal('Do you confirm action?')
+			return false
+		})
+		cy.contains('You selected Cancel').should('exist')
+	})
+
+	it.only('Interactuando con tooltip', function () {
+		cy.visit('/tool-tips')
+		cy.once('uncaught:exception', () => false)
+
+		cy.get('#toolTipButton').trigger('mouseover')
+		cy.contains('You hovered over the Button').should('exist')
+		cy.get('#toolTipButton').trigger('mouseout')
+		cy.contains('You hovered over the Button').should('not.exist')
 	})
 })
