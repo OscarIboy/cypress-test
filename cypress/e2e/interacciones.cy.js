@@ -1,4 +1,6 @@
 describe('Interactuar con los elementos', () => {
+	let texto
+
 	it('click', () => {
 		cy.visit('/buttons')
 		cy.once('uncaught:exception', () => false)
@@ -9,7 +11,7 @@ describe('Interactuar con los elementos', () => {
 			.and('contain', 'You have done a dynamic click')
 	})
 
-    it('doble click', () => {
+	it('doble click', () => {
 		cy.visit('/buttons')
 		cy.once('uncaught:exception', () => false)
 
@@ -19,7 +21,7 @@ describe('Interactuar con los elementos', () => {
 			.and('contain', 'You have done a double click')
 	})
 
-    it('click derecho', () => {
+	it('click derecho', () => {
 		cy.visit('/buttons')
 		cy.once('uncaught:exception', () => false)
 
@@ -58,10 +60,10 @@ describe('Interactuar con los elementos', () => {
 		cy.get('#firstName').type('Alejandro')
 	})
 
-	it.only('Checkboxes and radio buttons', () => {
+	it('Checkboxes and radio buttons', () => {
 		cy.visit('/automation-practice-form')
 		cy.once('uncaught:exception', () => false)
-		
+
 		//cy.get('#gender-radio-1').click({force: true})
 		//cy.get('#gender-radio-1').check({force: true})
 
@@ -79,5 +81,34 @@ describe('Interactuar con los elementos', () => {
 		cy.get('#hobbies-checkbox-1').should('be.checked')
 		cy.get('#hobbies-checkbox-2').should('not.be.checked')
 		cy.get('#hobbies-checkbox-3').should('be.checked')
+	})
+
+	it.only('Extrayendo informacion', function () {
+		cy.visit('/automation-practice-form')
+		cy.once('uncaught:exception', () => false)
+
+		// Alias
+		cy.get('#firstName').as('nombre')
+		cy.get('@nombre').type('Oscar')
+
+		cy.get('@nombre').then(($nombre) => {
+			texto = $nombre.val()
+			expect($nombre.val()).to.equal('Oscar')
+		})
+
+		// Forma correcta, pero el it debe de ser it('descripcion', function(){})
+		cy.get('@nombre').invoke('val').should('equal', 'Oscar')
+		cy.get('@nombre').invoke('val').as('nombreGlobal')
+	})
+
+	it.only('Compartir informacion', function () {
+		cy.visit('/automation-practice-form')
+		cy.once('uncaught:exception', () => false)
+
+		cy.get('#lastName').as('nombre2')
+		cy.get('@nombre2').type(texto)
+
+		// Forma Correcta
+		cy.get('#firstName').type(this.nombreGlobal)
 	})
 })
