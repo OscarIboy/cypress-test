@@ -83,7 +83,7 @@ describe('Interactuar con los elementos', () => {
 		cy.get('#hobbies-checkbox-3').should('be.checked')
 	})
 
-	it.only('Extrayendo informacion', function () {
+	it('Extrayendo informacion', function () {
 		cy.visit('/automation-practice-form')
 		cy.once('uncaught:exception', () => false)
 
@@ -101,7 +101,7 @@ describe('Interactuar con los elementos', () => {
 		cy.get('@nombre').invoke('val').as('nombreGlobal')
 	})
 
-	it.only('Compartir informacion', function () {
+	it('Compartir informacion', function () {
 		cy.visit('/automation-practice-form')
 		cy.once('uncaught:exception', () => false)
 
@@ -110,5 +110,32 @@ describe('Interactuar con los elementos', () => {
 
 		// Forma Correcta
 		cy.get('#firstName').type(this.nombreGlobal)
+	})
+
+	it('Interactuando con los dropdown(select)', function () {
+		cy.visit('https://app.endtest.io/guides/docs/how-to-test-dropdowns/')
+		cy.once('uncaught:exception', () => false)
+
+		//cy.get('#pets').select(1)
+		cy.get('#pets').select(2).should('have.value', 'rabbit')
+		//cy.get('#pets').select('rabbit').should('have.value', 'rabbit')
+	})
+
+	it.only('Interactuando con los dropdown(select) dinamico', function () {
+		cy.visit('https://react-select.com/home')
+		cy.get('#react-select-6-input').type(' ')
+
+		cy.get('#react-select-6-listbox').children().children().each(($el, index, $list)=>{
+			if($el.text()==='Red'){
+				//$el.on('click')
+				// $el.click()
+				
+				// Forma Correcta
+				//cy.wrap($el).click()
+			}
+		})
+
+		// Otra forma
+		cy.get('#react-select-6-option-3').click()
 	})
 })
