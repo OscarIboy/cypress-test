@@ -141,7 +141,7 @@ describe('Interactuar con los elementos', () => {
 		cy.get('#react-select-6-option-3').click()
 	})
 
-	it.only('Interactuando con tablas', function () {
+	it('Interactuando con tablas', function () {
 		cy.visit('https://www.w3schools.com/html/html_tables.asp')
 		cy.get('#customers')
 			.find('th')
@@ -187,5 +187,13 @@ describe('Interactuar con los elementos', () => {
 				const texto = $el.text()
 				expect(texto).to.equal('Maria Anders')
 			})
+	})
+
+	it.only('Interactuando con date pickers', function () {
+		cy.visit('https://material.angular.io/components/datepicker/overview')
+		cy.get('datepicker-overview-example').find('label').eq(0).type('08/11/2023')
+		
+		cy.get('datepicker-overview-example').find('button').click()
+		//cy.get('datepicker-overview-example').find('svg).click()
 	})
 })

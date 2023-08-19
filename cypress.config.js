@@ -11,8 +11,8 @@ module.exports = defineConfig({
       "**/1-getting-started/*.js",
       "**/2-advanced-examples/*.js"
       ],
-    //viewportWidth: 1920,
-    //viewportHeight: 1080,
+    viewportWidth: 1920,
+    viewportHeight: 1080,
     experimentalStudio: true,
   },
 });
