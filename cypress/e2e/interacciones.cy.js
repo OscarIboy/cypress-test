@@ -121,21 +121,71 @@ describe('Interactuar con los elementos', () => {
 		//cy.get('#pets').select('rabbit').should('have.value', 'rabbit')
 	})
 
-	it.only('Interactuando con los dropdown(select) dinamico', function () {
+	it('Interactuando con los dropdown(select) dinamico', function () {
 		cy.visit('https://react-select.com/home')
 		cy.get('#react-select-6-input').type(' ')
 
-		cy.get('#react-select-6-listbox').children().children().each(($el, index, $list)=>{
-			if($el.text()==='Red'){
-				//$el.on('click')
-				// $el.click()
-				
-				// Forma Correcta
-				//cy.wrap($el).click()
-			}
-		})
+		cy.get('#react-select-6-listbox')
+			.children()
+			.children()
+			.each(($el, index, $list) => {
+				if ($el.text() === 'Red') {
+					//$el.on('click')
+					// $el.click()
+					// Forma Correcta
+					//cy.wrap($el).click()
+				}
+			})
 
 		// Otra forma
 		cy.get('#react-select-6-option-3').click()
+	})
+
+	it.only('Interactuando con tablas', function () {
+		cy.visit('https://www.w3schools.com/html/html_tables.asp')
+		cy.get('#customers')
+			.find('th')
+			.each(($el, index, $list) => {
+				cy.log($el.text())
+			})
+
+		cy.get('#customers')
+			.find('th')
+			.first()
+			.invoke('text')
+			.should('equal', 'Company')
+
+		cy.get('#customers')
+			.find('th')
+			.eq(1)
+			.invoke('text')
+			.should('equal', 'Contact')
+
+		cy.get('#customers')
+			.find('th')
+			.eq(2)
+			.invoke('text')
+			.should('equal', 'Country')
+
+		cy.get('#customers').find('tr').should('have.length', 7)
+
+		cy.get('#customers')
+			.find('tr')
+			.eq(1)
+			.find('td')
+			.eq(1)
+			.invoke('text')
+			.should('equal', 'Maria Anders')
+
+		// Otra forma de hacerlo
+		cy.get('#customers')
+			.find('tr')
+			.eq(1)
+			.find('td')
+			.eq(1)
+			.then(($el) => {
+				const texto = $el.text()
+				expect(texto).to.equal('Maria Anders')
+			})
 	})
 })
